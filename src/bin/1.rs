@@ -34,10 +34,7 @@ fn product_list(list: &Vec<i32>) -> (i32, Vec<i32>) {
 fn part_one() -> Option<(i32, Vec<i32>)> {
     let numbers: Vec<i32> = get_numbers("day1-part1");
 
-    groups(numbers)
-        .iter()
-        .find(find_by_sum)
-        .map(product_list)
+    groups(numbers).iter().find(find_by_sum).map(product_list)
 }
 
 // fn part_two() -> Option<(i32, Vec<i32>)> {

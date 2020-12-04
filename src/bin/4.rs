@@ -42,6 +42,10 @@ impl Passport {
         }
     }
 
+    fn has_key(&self, val: &str) -> bool {
+        self.kv_pairs.iter().any(|(other_key, _)| val == other_key)
+    }
+
     fn validate_byr(val: &str) -> bool {
         val.parse::<i32>().map_or(false,|x| x >= 1920 && x <= 2002)
     }
@@ -118,11 +122,7 @@ impl Passport {
 
     fn validate(&self) -> bool {
         self.kv_pairs.iter().all(Passport::validate_val) &&
-        EXPECTED_KEYS.iter().all(|key| {
-            match key {
-                _ => self.kv_pairs.iter().any(|(other_key, _)| key == other_key)
-            }
-        })
+        EXPECTED_KEYS.iter().all(|x|self.has_key(x))
     }
 }
 

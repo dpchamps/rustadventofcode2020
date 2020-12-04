@@ -33,9 +33,10 @@ impl Passport {
             kv_pairs : entry
                 .split( " ")
                 .map(|x|{
-                    let mut iter = x.split(":");
-
-                    (String::from(iter.next().unwrap()), String::from(iter.next().unwrap()))
+                    match &x.split(":").collect::<Vec<&str>>()[..] {
+                        &[k, v, ..] => (String::from(k), String::from(v)),
+                        _ => panic!()
+                    }
                 })
                 .collect()
         }
